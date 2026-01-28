@@ -139,13 +139,13 @@ def get_precipitation(data, key):
         total += data["snow"][key]
     return total
 
-def get_icon_url(weather_icon_code):
+def get_icon_path(weather_icon_code):
     if weather["classic-icons"]:
         weather_icon_name = weather_icon_code + "@2x.png"
-        return "https://openweathermap.org/img/wn/" + weather_icon_name
+        weather_icon_url = "https://openweathermap.org/img/wn/" + weather_icon_name
     else:
         weather_icon_name = aw_icon_map[weather_icon_code] + ".svg"
-        return "https://www.accuweather.com/assets/images/weather-icons/v2a/" + weather_icon_name
+        weather_icon_url = "https://www.accuweather.com/assets/images/weather-icons/v2a/" + weather_icon_name
 
     weather_icon_path = weather["icon_directory"] + "/" + weather_icon_name
     print(f"Checking for icon {weather_icon_path}")
@@ -153,6 +153,8 @@ def get_icon_url(weather_icon_code):
         img_data = requests.get(weather_icon_url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'}).content
         with open(weather_icon_path, 'wb') as weather_icon:
             weather_icon.write(img_data)
+
+    return weather_icon_path
 
 def get_weather_info():
     if weather["api_key"] is None:
@@ -201,7 +203,7 @@ def get_weather_info():
         "temp_value": weather_data["main"]["temp"],
         "icon_name": fdo_icon_map[weather_data["weather"][0]["icon"]],
         "conditions": weather_data["weather"][0]["main"],
-        "icon": get_icon_url(weather_data["weather"][0]["icon"]),
+        "icon": get_icon_path(weather_data["weather"][0]["icon"]),
         "pres": weather_data["main"]["pressure"],
         "hum": weather_data["main"]["humidity"],
         "visi": weather_data["visibility"],
@@ -224,7 +226,7 @@ def get_weather_info():
                 "wind_source": data["wind"]["deg"],
                 "wind_gust": data["wind"].get("gust"),
                 "coverage": data["clouds"]["all"],
-                "icon": get_icon_url(weather_data["weather"][0]["icon"]),
+                "icon": get_icon_path(weather_data["weather"][0]["icon"]),
                 "icon_name": fdo_icon_map[weather_data["weather"][0]["icon"]],
                 "prec": get_precipitation(data, "3h"),
                 "pop": data["pop"] * 100,
