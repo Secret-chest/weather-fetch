@@ -1,8 +1,17 @@
-[
-    {
-        "location": "Timișoara",
-        "source": "openweathermap",
-        "apikey": "",
-        "interval": 1200
-    }
-]
+{
+    "main_location": 0,
+    "locations": [
+        {
+            "location": "Timișoara",
+            "source": "openweathermap",
+            "apikey": "",
+            "interval": 1200
+        },
+        {
+            "location": "Deva",
+            "source": "openweathermap",
+            "apikey": "",
+            "interval": 1200
+        }
+    ]
+}

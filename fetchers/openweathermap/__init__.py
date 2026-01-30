@@ -235,7 +235,7 @@ def get_weather_info():
             for data in forecast_data["list"]
         ]
     }
-    with open(weather["data_directory"] + "/" + "data.json", "w") as file:
+    with open(weather["data_directory"] + "/locations/" + f"{weather['basename']}.json", "w") as file:
         json.dump(data, file, indent=4)
 
 def get_measurement_type_for_gnu():
@@ -246,10 +246,11 @@ def get_measurement_type_for_gnu():
         return "metric"
     return "imperial"
 
-def fetch_weather(location, apikey, classic_icons=False, units=None, debug=False):
+def fetch_weather(location, apikey, i, classic_icons=False, units=None, debug=False):
     weather["location_key"] = location
     weather["api_key"] = apikey
     weather["classic-icons"] = classic_icons
+    weather["basename"] = str(i)
     units = units or get_measurement_type_for_gnu()
     if units == "metric":
         weather["metric_units"] = True
@@ -258,12 +259,12 @@ def fetch_weather(location, apikey, classic_icons=False, units=None, debug=False
 
     weather["debug"] = debug
 
-    weather["icon_directory"] = os.getenv("HOME") + "/.local/share/weather/icons"
+    weather["icon_directory"] = os.path.join(os.environ.get("XDG_DATA_HOME") or os.path.expanduser("~/.local/share"), "weather/icons")
     icon_dir = Path(weather["icon_directory"])
     if not icon_dir.exists():
         icon_dir.mkdir(parents=True, exist_ok=True)
 
-    weather["data_directory"] = os.getenv("HOME") + "/.local/share/weather/data"
+    weather["data_directory"] = os.path.join(os.environ.get("XDG_DATA_HOME") or os.path.expanduser("~/.local/share"), "weather/data")
     data_dir = Path(weather["data_directory"])
     if not data_dir.exists():
         data_dir.mkdir(parents=True, exist_ok=True)

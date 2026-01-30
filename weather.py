@@ -41,6 +41,7 @@ class WeatherUpdater(Gio.Application):
         self.fetcher_paths = ([Path(os.environ.get("XDG_DATA_HOME") or "~/.local/share").expanduser() / "weather" / "fetchers"]
                               + ([Path(p) / "fetchers" for p in os.environ.get("XDG_DATA_DIRS").split(":")] if "XDG_DATA_DIRS" in os.environ
                                 else [Path("/") / "usr" / "share" / "fetchers"]))
+        self.data_path = Path(os.environ.get("XDG_DATA_HOME") or "~/.local/share").expanduser() / "weather" / "data"
 
         self.modules_list = []
 
@@ -56,11 +57,16 @@ class WeatherUpdater(Gio.Application):
 
         with open(self.config_path, "r") as f:
             data = json.load(f)
-            for location in data:
+            (self.data_path / "locations").mkdir(parents=True, exist_ok=True)
+            # Create the symlink
+            if (self.data_path / "data.json").exists():
+                (self.data_path / "data.json").unlink()
+            os.symlink(self.data_path / "locations" / f"{data['main_location']}.json", self.data_path / "data.json")
+            for i, location in enumerate(data["locations"]):
                 module = self.modules[location["source"]]
                 settings = location.copy()
                 del settings["source"], settings["interval"]
-                module.fetch_weather(**settings)
+                module.fetch_weather(**settings, i=i)
 
                 GLib.timeout_add_seconds(location["interval"], lambda: module.fetch_weather(**settings) or True)
 
