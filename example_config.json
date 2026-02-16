@@ -4,7 +4,7 @@
         {
             "location": "Timișoara",
             "source": "openweathermap",
-            "apikey": "",
+            "apikey": "f169f2d87ac0b6ff4b398e434c38d5fb",
             "interval": 1200
         },
         {
@@ -12,7 +12,7 @@
             "lat": 45.878,
             "lon": 22.914,
             "source": "openweathermap",
-            "apikey": "",
+            "apikey": "f169f2d87ac0b6ff4b398e434c38d5fb",
             "interval": -1
         }
     ]

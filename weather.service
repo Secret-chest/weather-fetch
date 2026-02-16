@@ -1,0 +1,10 @@
+[Unit]
+Description="Weather data fetching"
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/weather-fetch.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

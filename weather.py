@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import locale
 import json
 import os
@@ -39,8 +41,8 @@ class WeatherUpdater(Gio.Application):
 
         self.config_path = Path(os.environ.get("XDG_CONFIG_HOME") or "~/.config").expanduser() / "weather" / "config.json"
         self.fetcher_paths = ([Path(os.environ.get("XDG_DATA_HOME") or "~/.local/share").expanduser() / "weather" / "fetchers"]
-                              + ([Path(p) / "fetchers" for p in os.environ.get("XDG_DATA_DIRS").split(":")] if "XDG_DATA_DIRS" in os.environ
-                                else [Path("/") / "usr" / "share" / "fetchers"]))
+                              + ([Path(p) / "weather" / "fetchers" for p in os.environ.get("XDG_DATA_DIRS").split(":")] if "XDG_DATA_DIRS" in os.environ
+                                else [Path("/") / "usr" / "share" / "weather" / "fetchers"]))
         self.data_path = Path(os.environ.get("XDG_DATA_HOME") or "~/.local/share").expanduser() / "weather" / "data"
 
         self.modules_list = []

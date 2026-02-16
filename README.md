@@ -25,4 +25,8 @@ Just run the provided `weather.py` after putting the `fetchers` in
 `~/.config/weather/config.json`. The fetchers can also be in
 `/usr/share/weather/fetchers` if you want to install this system-wide.
 
-A systemd user unit will be available soon.
+## Installation
+
+You can use the provided `weather.service` as a user unit for systemd and put
+the fetchers in `/usr/share/weather/fetchers`, and the `weather.py` in
+`/usr/bin/weather-fetch.py`. Enable the user unit, and it should run.
