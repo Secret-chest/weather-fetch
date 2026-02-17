@@ -266,12 +266,12 @@ def fetch_weather(apikey, i, classic_icons=False, units=None, debug=False, locat
 
     weather["debug"] = debug
 
-    weather["icon_directory"] = os.path.join(os.environ.get("XDG_DATA_HOME") or os.path.expanduser("~/.local/share"), "weather/icons")
+    weather["icon_directory"] = os.path.join(os.environ.get("XDG_DATA_HOME") or os.path.expanduser("~/.local/share"), "owf/icons")
     icon_dir = Path(weather["icon_directory"])
     if not icon_dir.exists():
         icon_dir.mkdir(parents=True, exist_ok=True)
 
-    weather["data_directory"] = os.path.join(os.environ.get("XDG_DATA_HOME") or os.path.expanduser("~/.local/share"), "weather/data")
+    weather["data_directory"] = os.path.join(os.environ.get("XDG_DATA_HOME") or os.path.expanduser("~/.local/share"), "owf/data")
     data_dir = Path(weather["data_directory"])
     if not data_dir.exists():
         data_dir.mkdir(parents=True, exist_ok=True)

@@ -39,11 +39,11 @@ class WeatherUpdater(Gio.Application):
             flags=Gio.ApplicationFlags.FLAGS_NONE,
         )
 
-        self.config_path = Path(os.environ.get("XDG_CONFIG_HOME") or "~/.config").expanduser() / "weather" / "config.json"
-        self.fetcher_paths = ([Path(os.environ.get("XDG_DATA_HOME") or "~/.local/share").expanduser() / "weather" / "fetchers"]
-                              + ([Path(p) / "weather" / "fetchers" for p in os.environ.get("XDG_DATA_DIRS").split(":")] if "XDG_DATA_DIRS" in os.environ
-                                else [Path("/") / "usr" / "share" / "weather" / "fetchers"]))
-        self.data_path = Path(os.environ.get("XDG_DATA_HOME") or "~/.local/share").expanduser() / "weather" / "data"
+        self.config_path = Path(os.environ.get("XDG_CONFIG_HOME") or "~/.config").expanduser() / "owf" / "config.json"
+        self.fetcher_paths = ([Path(os.environ.get("XDG_DATA_HOME") or "~/.local/share").expanduser() / "owf" / "fetchers"]
+                              + ([Path(p) / "owf" / "fetchers" for p in os.environ.get("XDG_DATA_DIRS").split(":")] if "XDG_DATA_DIRS" in os.environ
+                                else [Path("/") / "usr" / "share" / "owf" / "fetchers"]))
+        self.data_path = Path(os.environ.get("XDG_DATA_HOME") or "~/.local/share").expanduser() / "owf" / "data"
 
         self.modules_list = []
 
