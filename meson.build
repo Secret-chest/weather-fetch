@@ -8,7 +8,7 @@ install_data(
     'weather.py',
     install_dir: join_paths(get_option('prefix'),
     get_option('bindir')),
-    rename: 'weather-fetch',
+    rename: 'open-weather-fetch',
     install_mode: 'rwxr-xr-x'
 )
 
@@ -19,8 +19,8 @@ conf.set('systemd_prefix', get_option('systemd_prefix'))
 conf.set('bindir', join_paths(get_option('prefix'), get_option('bindir')))
 
 service_file = configure_file(
-    input: 'weather.service',
-    output: 'weather.service',
+    input: 'open-weather-fetch.service',
+    output: 'open-weather-fetch.service',
     configuration: conf,
     install: true,
     install_dir: join_paths(get_option('systemd_prefix'), 'systemd', 'user')
