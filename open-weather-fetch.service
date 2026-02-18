@@ -3,7 +3,7 @@ Description="Weather data fetching"
 
 [Service]
 Type=simple
-ExecStart=@bindir@/weather-fetch
+ExecStart=@bindir@/open-weather-fetch
 Restart=on-failure
 
 [Install]
