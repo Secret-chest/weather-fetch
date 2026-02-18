@@ -1,7 +1,8 @@
 project(
     'open-weather-fetch',
     version: '0.1.0',
-    meson_version: '>= 1.1'
+    meson_version: '>= 1.1',
+    license: 'MIT'
 )
 
 # Main Python module
