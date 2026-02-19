@@ -11,7 +11,7 @@ without having to connect to the network servers and download the data,
 it is already on the file system.
 
 This means that multiple clients can use the data instantly without
-worrying about weather sevice usage limits and the caveats of configuring
+worrying about weather service usage limits and the caveats of configuring
 weather services and connecting to the network.
 
 ## Configuration
