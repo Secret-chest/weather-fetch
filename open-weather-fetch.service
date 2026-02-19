@@ -1,5 +1,7 @@
 [Unit]
 Description="Weather data fetching"
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple
